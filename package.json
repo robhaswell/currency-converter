@@ -6,11 +6,13 @@
   "dependencies": {
     "choo": "^4.1.0",
     "express": "^4.15.3",
+    "nodemon": "^1.11.0",
     "watchify": "^3.9.0"
   },
   "devDependencies": {},
   "scripts": {
     "start": "echo 'open http://localhost:3000 in your browser' & nodemon server & watchify -d src/client.js -o static/js/bundle.js",
+    "debug": "echo 'open http://localhost:3000 in your browser' & nodemon --inspect server & watchify -d src/client.js -o static/js/bundle.js",
     "build": "browserify src/client.js -o static/js/bundle.js"
   },
   "author": "",
