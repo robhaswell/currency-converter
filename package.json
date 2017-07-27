@@ -1,0 +1,18 @@
+{
+  "name": "choo-seq",
+  "version": "1.0.0",
+  "description": "A little currency converter app in choo",
+  "main": "index.js",
+  "dependencies": {
+    "choo": "^4.1.0",
+    "express": "^4.15.3",
+    "watchify": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "echo 'open http://localhost:3000 in your browser' & nodemon server & watchify -d src/client.js -o static/js/bundle.js",
+    "build": "browserify src/client.js -o static/js/bundle.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
