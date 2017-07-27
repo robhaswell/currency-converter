@@ -12,22 +12,45 @@ module.exports = (state, prev, send) => {
 }
 
 const conversionInterface = (state, send) => {
+  function update (e) {
+    send('convert', e.target.value)
+  }
+
+  function updateBaseRate (e) {
+    send('updateBaseRate', e.target.value)
+  }
+  function updateTargetCurrency (e) {
+    send('updateTargetCurrency', e.target.value)
+  }
+
+  function swap () {
+    send('swap')
+  }
+
+  function isSelected (value, desired) {
+    return value === desired
+  }
+
+  function value () {
+    return state.result
+  }
+
   return html`
     <div class="converter">
       <div>
         <div class="base-currency">
-          <select>
-            ${currencies.map(c => html`<option>${c}</option>`)}
+          <select onchange=${updateBaseRate}>
+            ${currencies.map(c => html`<option selected=${isSelected(c, state.currencyFrom)}>${c}</option>`)}
           </select>
-          <input class="input" type="number" placeholder="Enter a value…" />
+          <input class="input" type="number" placeholder="Enter a value…" oninput=${update} id="input" />
         </div>
         <div class="target-currency">
-          <select>
-            ${currencies.map(c => html`<option>${c}</option>`)}
+          <select onchange=${updateTargetCurrency}>
+            ${currencies.map(c => html`<option selected=${isSelected(c, state.currencyTo)}>${c}</option>`)}
           </select>
-          <span class="conversion">123</span>
+          <span class="conversion">${value()}</span>
         </div>
-        <button>🔃 Swap</button>
+        <button onclick=${swap}>🔃 Swap</button>
       </div>
     </div>
   `
